@@ -14,7 +14,7 @@
       }
     },
     mounted () {
-       this.$http.get('http://d8/articles').then((response) => {
+       this.$http.get(backend + '/articles').then((response) => {
         this.items = response.body
       }, (err) => {
         console.log(err)

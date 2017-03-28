@@ -19,7 +19,7 @@ export default {
   methods: {
     doSomething() {
       this.resultMessage += '-ttt'
-      this.$http.get('http://d8/node/2?_format=json').then((response) => {
+      this.$http.get(backend + '/node/2?_format=json').then((response) => {
         // depending on your api, you may or may not have to make the .json() call
         // if your repsonse.body is null, try this
         this.resultMessage = response.body.title[0].value;

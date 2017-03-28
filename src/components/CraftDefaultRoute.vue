@@ -18,7 +18,7 @@
       }
     },
     mounted () {
-      this.$http.get('http://d8' + this.$route.path + '?_format=json').then((response) => {
+      this.$http.get(backend + this.$route.path + '?_format=json').then((response) => {
         if (typeof(response.body.nid !== undefined)) {
           this.entity = response.body
           this.type = 'node'

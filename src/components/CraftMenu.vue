@@ -14,7 +14,7 @@
       }
     },
     mounted () {
-       this.$http.get('http://d8/api/menu_items/main?_format=json').then((response) => {
+       this.$http.get(backend + '/api/menu_items/main?_format=json').then((response) => {
         this.items = response.body
 
       }, (err) => {

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import 'vue-material/dist/vue-material.css'
 import Resource from 'vue-resource'
+import './config.js'
 
 Vue.config.productionTip = false
 var VueMaterial = require('vue-material')

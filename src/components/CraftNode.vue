@@ -21,7 +21,7 @@ export default {
   },
   mounted () {
     this.loading = true
-      this.$http.get('http://d8/node/' + this.$route.params.id + '?_format=json').then((response) => {
+      this.$http.get(backend + '/node/' + this.$route.params.id + '?_format=json').then((response) => {
         this.node.title = response.body.title[0].value
         this.node.body = response.body.body[0].value
         this.loading = false
