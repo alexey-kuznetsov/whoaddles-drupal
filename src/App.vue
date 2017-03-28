@@ -16,6 +16,10 @@
       </div>
     </md-toolbar>
      <craft-menu></craft-menu>
+     <md-bottom-bar>
+      <craft-login-form v-if="showLogin"></craft-login-form>      
+      <md-icon @click.native="showLogin = !showLogin">warning</md-icon>
+     </md-bottom-bar>
   </md-sidenav>
 </div>
 <div class="container">
@@ -26,6 +30,7 @@
 
 <script>
 import CraftMenu from '@/components/CraftMenu'
+import CraftLoginForm from '@/components/CraftLoginForm'
 export default {
   name: 'app',
   methods: {
@@ -35,11 +40,13 @@ export default {
   },
   data () {
     return {
-      menu: []
+      menu: [],
+      showLogin: false
     }
   },
   components: {
-    'craft-menu': CraftMenu
+    'craft-menu': CraftMenu,
+    'craft-login-form': CraftLoginForm
   }
 }
 
@@ -56,5 +63,10 @@ export default {
   width: 1200px;
   margin: 0 auto;
   padding: 32px 16px;
+}
+
+.md-sidenav-content > .md-bottom-bar {  
+  position: absolute;
+  bottom: 0;
 }
 </style>
