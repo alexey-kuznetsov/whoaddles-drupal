@@ -16,10 +16,12 @@
       </div>
     </md-toolbar>
      <craft-menu></craft-menu>
-     <md-bottom-bar>
-      <craft-login-form v-if="showLogin"></craft-login-form>      
+     <md-whiteframe md-elevation="8" class="bottom-sticked">
+      <transition :name="trName" v-on:after-enter="toggleTrName" v-on:after-leave="toggleTrName">
+      <craft-login-form v-if="showLogin"></craft-login-form>
+      </transition>
       <md-icon @click.native="showLogin = !showLogin">warning</md-icon>
-     </md-bottom-bar>
+     </md-whiteframe>
   </md-sidenav>
 </div>
 <div class="container">
@@ -36,12 +38,16 @@ export default {
   methods: {
     toggleLeftSidenav() {
       this.$refs.leftSidenav.toggle();
+    },
+    toggleTrName(el) {
+      this.trName = (this.trName === 'fadeUp') ? 'fadeDown' : 'fadeUp'
     }
   },
   data () {
     return {
       menu: [],
-      showLogin: false
+      showLogin: false,
+      trName: 'fadeUp'
     }
   },
   components: {
@@ -65,8 +71,11 @@ export default {
   padding: 32px 16px;
 }
 
-.md-sidenav-content > .md-bottom-bar {  
+.md-sidenav-content > .bottom-sticked {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
 }
 </style>
