@@ -6,7 +6,6 @@ import router from './router'
 import 'vue-material/dist/vue-material.css'
 import Resource from 'vue-resource'
 import './config.js'
-import 'vue2-animate/dist/vue2-animate.min.css'
 
 Vue.config.productionTip = false
 var VueMaterial = require('vue-material')

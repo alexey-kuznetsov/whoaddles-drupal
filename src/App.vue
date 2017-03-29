@@ -15,13 +15,14 @@
         <h3 class="md-title">Sidenav content</h3>
       </div>
     </md-toolbar>
-     <craft-menu></craft-menu>
-     <md-whiteframe md-elevation="8" class="bottom-sticked">
-      <transition :name="trName" v-on:after-enter="toggleTrName" v-on:after-leave="toggleTrName">
-      <craft-login-form v-if="showLogin"></craft-login-form>
-      </transition>
-      <md-icon @click.native="showLogin = !showLogin">warning</md-icon>
-     </md-whiteframe>
+     <craft-menu></craft-menu>      
+      <md-dialog md-open-from="#craftLogin" md-close-to="#custom" ref="craftLogin">
+        <md-dialog-title>Вход на сайт</md-dialog-title>
+        <md-dialog-content><craft-login-form></craft-login-form></md-dialog-content>        
+      </md-dialog>      
+      <md-button class="md-fab md-fab-bottom-right" id="craftLogin" @click.native="openDialog('craftLogin')">
+        <md-icon>warning</md-icon>
+      </md-button>     
   </md-sidenav>
 </div>
 <div class="container">
@@ -38,16 +39,17 @@ export default {
   methods: {
     toggleLeftSidenav() {
       this.$refs.leftSidenav.toggle();
+    },    
+    openDialog(ref) {
+      this.$refs[ref].open();
     },
-    toggleTrName(el) {
-      this.trName = (this.trName === 'fadeUp') ? 'fadeDown' : 'fadeUp'
+    closeDialog(ref) {
+      this.$refs[ref].close();
     }
   },
   data () {
     return {
-      menu: [],
-      showLogin: false,
-      trName: 'fadeUp'
+      menu: []      
     }
   },
   components: {
@@ -71,11 +73,4 @@ export default {
   padding: 32px 16px;
 }
 
-.md-sidenav-content > .bottom-sticked {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 16px;
-}
 </style>
