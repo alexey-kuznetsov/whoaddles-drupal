@@ -10,6 +10,7 @@ Vue.use(Router)
 const Foo = { template: '<div>foo</div>' }
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
