@@ -6,17 +6,33 @@ import router from './router'
 import 'vue-material/dist/vue-material.css'
 import Resource from 'vue-resource'
 import './config.js'
+import Vuex from 'vuex'
 
 Vue.config.productionTip = false
 var VueMaterial = require('vue-material')
 
 Vue.use(VueMaterial)
 Vue.use(Resource)
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    loggedIn: false,
+    user: {}
+  },
+  mutations: {
+    logIn (state, user) {
+      state.user = user
+      state.loggedIn = true
+    }
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App },
 
@@ -32,5 +48,3 @@ Vue.material.registerTheme('about', {
     hue: 300
   }
 })
-
-//Vue.material.setCurrentTheme('about')

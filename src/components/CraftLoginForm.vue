@@ -11,7 +11,7 @@
     <md-input type="password" v-model="user.pass" @input="noPass = false"></md-input>
   </md-input-container>
   <md-dialog-actions>
-    <md-button class="md-raised md-primary" md-align="end" @click.native="sendCredentials">Вход</md-button>
+    <md-button class="md-raised md-primary" md-align="end" @click.native.stop.prevent="sendCredentials">Вход</md-button>
   </md-dialog-actions>
   </form>
   <md-spinner md-indeterminate v-if="loading"></md-spinner>
@@ -46,14 +46,20 @@
         if (!errValidation) {
             this.loading = true
             this.sended = true
-            this.$http.post(backend + '/user/login?_format=json', this.user).then(function (response) {
+            this.$http.post(backend + '/user/login?_format=json', this.user, {
+              credentials: true,
+              headers: {
+                 'Content-Type': 'text/plain'
+              }}).then(function (response) {
                 this.loading = false
                 this.loggedIn = true
                 this.authError = false
                 console.log(response)
+                this.$store.commit('logIn', response.body)
                 setTimeout(this.$parent.$parent.close(), 2000)
 
             }, function (response) {
+                console.log(response)
                 this.loading = false
                 this.authError = true
                 this.authErrorMessage = response.data.message

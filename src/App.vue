@@ -15,14 +15,21 @@
         <h3 class="md-title">Sidenav content</h3>
       </div>
     </md-toolbar>
-     <craft-menu></craft-menu>      
+     <craft-menu></craft-menu>
       <md-dialog md-open-from="#craftLogin" md-close-to="#custom" ref="craftLogin">
         <md-dialog-title>Вход на сайт</md-dialog-title>
-        <md-dialog-content><craft-login-form></craft-login-form></md-dialog-content>        
-      </md-dialog>      
-      <md-button class="md-fab md-fab-bottom-right" id="craftLogin" @click.native="openDialog('craftLogin')">
+        <md-dialog-content><craft-login-form></craft-login-form></md-dialog-content>
+      </md-dialog>
+      <md-dialog md-open-from="#craftLogout" md-close-to="#custom" ref="craftLogout">
+        <md-dialog-title>Выйти?</md-dialog-title>
+        <md-dialog-content><craft-logout-form></craft-logout-form></md-dialog-content>
+      </md-dialog>
+      <md-button class="md-fab md-fab-bottom-right" id="craftLogin" @click.native="openDialog('craftLogin')" v-if="!loggedIn">
+        <md-icon>info</md-icon>
+      </md-button>
+      <md-button class="md-fab md-fab-bottom-right" id="craftLogout" @click.native="openDialog('craftLogout')" v-else>
         <md-icon>warning</md-icon>
-      </md-button>     
+      </md-button>
   </md-sidenav>
 </div>
 <div class="container">
@@ -34,12 +41,13 @@
 <script>
 import CraftMenu from '@/components/CraftMenu'
 import CraftLoginForm from '@/components/CraftLoginForm'
+import CraftLogoutForm from '@/components/CraftLogoutForm'
 export default {
   name: 'app',
   methods: {
     toggleLeftSidenav() {
       this.$refs.leftSidenav.toggle();
-    },    
+    },
     openDialog(ref) {
       this.$refs[ref].open();
     },
@@ -49,12 +57,18 @@ export default {
   },
   data () {
     return {
-      menu: []      
+      menu: []
     }
   },
   components: {
     'craft-menu': CraftMenu,
-    'craft-login-form': CraftLoginForm
+    'craft-login-form': CraftLoginForm,
+    'craft-logout-form': CraftLogoutForm
+  },
+  computed: {
+    loggedIn: function () {
+      return this.$store.state.loggedIn
+    }
   }
 }
 

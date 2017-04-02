@@ -18,7 +18,16 @@
       }
     },
     mounted () {
-      this.$http.get(backend + this.$route.path + '?_format=json').then((response) => {
+      this.$http.get(backend + this.$route.path + '?_format=json', {
+        headers: {
+          //'logout_token' : this.$store.state.user.logout_token,
+          'csrf_token': this.$store.state.user.csrf_token,
+          'X-CSRF-Token': this.$store.state.user.csrf_token,
+          'Accept': 'application/json',
+          'Content-Type': 'application/hal+json',
+          'Authorization': 'Basic ' + btoa('tester:tester')
+        }
+      }).then((response) => {
         if (typeof(response.body.nid !== undefined)) {
           this.entity = response.body
           this.type = 'node'
