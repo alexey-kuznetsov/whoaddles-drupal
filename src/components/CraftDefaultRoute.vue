@@ -19,13 +19,9 @@
     },
     mounted () {
       this.$http.get(backend + this.$route.path + '?_format=json', {
+        credentials: true,
         headers: {
-          //'logout_token' : this.$store.state.user.logout_token,
-          'csrf_token': this.$store.state.user.csrf_token,
-          'X-CSRF-Token': this.$store.state.user.csrf_token,
-          'Accept': 'application/json',
-          'Content-Type': 'application/hal+json',
-          'Authorization': 'Basic ' + btoa('tester:tester')
+          'Content-Type': 'text/plain'
         }
       }).then((response) => {
         if (typeof(response.body.nid !== undefined)) {
