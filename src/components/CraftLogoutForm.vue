@@ -16,12 +16,12 @@
     methods: {
       logout() {
         this.loading = true
-        this.$http.get(backend + '/user/logout?_format=json', {
-          headers: {
-          'logout_token' : this.$store.state.user.logout_token,
-          //'csrf_token': this.$store.state.user.csrf_token,
-           //'X-CSRF-Token': this.$store.state.user.csrf_token
-        }
+        this.$http.get(backend + '/user/logout', {          
+        credentials: true,
+        headers: {
+          'Content-Type': 'text/plain'
+          }
+
       }).then(
         function (response) {
           console.log(response)
