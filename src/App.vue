@@ -7,6 +7,7 @@
     </md-button>
 
     <h2 class="md-title"><router-link to="/" tag="div">My App</router-link></h2>
+    <craft-user-check></craft-user-check>
   </md-toolbar>
 
   <md-sidenav class="md-left" ref="leftSidenav">
@@ -42,6 +43,7 @@
 import CraftMenu from '@/components/CraftMenu'
 import CraftLoginForm from '@/components/CraftLoginForm'
 import CraftLogoutForm from '@/components/CraftLogoutForm'
+import CraftUserCheck from '@/components/CraftUserCheck'
 export default {
   name: 'app',
   methods: {
@@ -63,7 +65,8 @@ export default {
   components: {
     'craft-menu': CraftMenu,
     'craft-login-form': CraftLoginForm,
-    'craft-logout-form': CraftLogoutForm
+    'craft-logout-form': CraftLogoutForm,
+    'craft-user-check' : CraftUserCheck
   },
   computed: {
     loggedIn: function () {

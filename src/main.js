@@ -18,12 +18,19 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     loggedIn: false,
-    user: {}
+    user: {},
+    userName: ''
   },
   mutations: {
-    logIn (state, user) {
-      state.user = user
+    logIn (state, payload) {
+      state.user = payload.user
       state.loggedIn = true
+      state.userName = payload.userName
+    },
+    logOut (state) {
+      state.user = {}
+      state.loggedIn = false
+      state.userName = ''
     }
   }
 })

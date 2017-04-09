@@ -16,7 +16,7 @@
     methods: {
       logout() {
         this.loading = true
-        this.$http.get(backend + '/user/logout', {          
+        this.$http.get(backend + '/user/logout', {
         credentials: true,
         headers: {
           'Content-Type': 'text/plain'
@@ -26,6 +26,8 @@
         function (response) {
           console.log(response)
           this.loading = false
+          this.$store.commit('logOut')
+          setTimeout(this.$parent.$parent.close(), 2000)
         }, function (response) {
           console.log(response)
           this.loading = false

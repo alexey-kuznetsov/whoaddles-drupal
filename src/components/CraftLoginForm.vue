@@ -25,9 +25,13 @@
         noLogin: false,
         noPass: false,
         loading: false,
-        loggedIn: false,
         authError: false,
         authErrorMessage: ''
+      }
+    },
+     computed: {
+      loggedIn: function () {
+        return this.$store.state.loggedIn
       }
     },
     methods: {
@@ -52,10 +56,13 @@
                  'Content-Type': 'text/plain'
               }}).then(function (response) {
                 this.loading = false
-                this.loggedIn = true
                 this.authError = false
                 console.log(response)
-                this.$store.commit('logIn', response.body)
+                var payload = {
+                  user: response.body,
+                  userName: response.body.current_user.name
+                }
+                this.$store.commit('logIn', payload)
                 setTimeout(this.$parent.$parent.close(), 2000)
 
             }, function (response) {
